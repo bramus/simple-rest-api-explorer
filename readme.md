@@ -14,9 +14,9 @@ Edit the tad of JavaScript at the bottom of `index.html`
 ## Notes
 
 * Only tested with APIs returning JSON or JSONP.
-* Custom headers don't work with JSONP. If you do need both JSONP *and* an API-Key: ask your API provider to enable CORS so you can switch to JSON.
+* Custom headers don't work with JSONP. If you do need both JSONP *and* an API-Key: ask your API provider to enable [CORS](http://www.html5rocks.com/en/tutorials/cors/) so you can switch to JSON.
 * Only `GET` supported (for now?)
 
-Built by Bramus! - http://www.bram.us/(http://www.bram.us/)
+Built by Bramus! - [http://www.bram.us/](http://www.bram.us/)
 
-Powered by Highlight.js(http://softwaremaniacs.org/soft/highlight/en/) and Skeleton(http://www.getskeleton.com/)
+Powered by [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/) and [Skeleton](http://www.getskeleton.com/)
