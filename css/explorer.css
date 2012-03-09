@@ -1,0 +1,29 @@
+#sidebar small {
+	font-size: 9px;
+	font-family: courier;
+	color: #666;
+	padding-left: 6px;
+}
+
+#sidebar .active {
+	background: #FF9;
+}
+
+dt {
+	margin-top: 20px;
+}
+
+#apiurl {
+	width: 100%;
+}
+
+code {
+	font-family: "courier new", courier, sans-serif;
+	width: 100%;
+	height: 400px;
+	overflow: scroll;
+}
+
+pre {
+	margin-bottom: 20px;
+}

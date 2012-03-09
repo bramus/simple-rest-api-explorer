@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<meta charset="utf-8">
+	<title>Simple REST API Explorer &mdash; A simple way to showcasing and exploring all endpoints of your RESTful API</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="css/layout.css">
+	
+	<link rel="stylesheet" href="css/explorer.css">
+	<link rel="stylesheet" href="css/zenburn.min.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+	
+</head>
+<body>
+
+	<div class="container">
+		<div class="sixteen columns">
+			<h1 class="remove-bottom" style="margin-top: 40px">Simple REST API Explorer <img src="img/spinner.gif" id="loading" alt="" title="" width="16" height="16" style="display: none;" /></h1>
+			<h5>Twitter API Demo (partial)</h5>
+			<hr />
+		</div>
+		<div class="four columns" id="sidebar">
+			<dl>
+				<dt style="margin-top: 0"><h4>Statuses</h4></dt>
+				<dd><a href="/statuses/show.json?id=65214371684548609&amp;include_entities=true">detail</a><small>/statuses/show/:id</small></dd>
+				<dd><a href="/statuses/65214371684548609/retweeted_by.json">retweeted by</a><small>/statuses/:id/retweeted_by</small></dd>
+				<dd><a href="/statuses/oembed.json?id=65214371684548609">oembed</a><small>/statuses/oembed</small></dd>
+				<dt><h4>Users</h4></dt>
+				<dd><a href="/users/show.json?screen_name=bramus&amp;include_entities=true">detail</a><small>/users/show</small></dd>
+				<dd><a href="/users/lookup.json?screen_name=bramus,bramurss&amp;include_entities=true">lookup</a><small>/users/lookup</small></dd>
+			</dl>
+		</div>
+		<div class="eleven columns">
+			<form action="#" method="post">
+				<label>API URL: <input type="text" id="apiurl" /></label>
+				<pre><code id="result" class="language-javascript"></code></pre>
+			</form>
+		</div>
+		<div class="twelve columns offset-by-four">
+			<p>Simple REST API Explorer, built by Bramus! &mdash; <a href="http://www.bram.us/">http://www.bram.us/</a></p>
+		</div>
+	</div>
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/highlight.min.js"></script>
+	<script>
+		// base URL of the API to call.
+		var apiBaseUrl = 'https://api.twitter.com/1';
+		
+		// Data type you're expecting back. Only tested with JSON and JSONP
+		var apiDataType = 'jsonp';
+		
+		// Extra headers you want to inject when making the call. - eg. an API-Key or an authentication token.
+		// WARNING: Doesn't work when using 'jsonp' as API Data Type! If you do need both JSONP *and* an API Key: ask your API provider to enable CORS so you can switch to JSON.
+		var apiExtraHeaders = {};
+		
+		// Extra suffix to add to each URL called. - eg. an API-Key or an authentication token.
+		var apiUrlSuffix = '';
+	</script>
+	<script src="js/main.js"></script>
+</body>
+</html>
