@@ -1,6 +1,6 @@
 jQuery(function($) {
 	
-	var makeCall = function(apiUrl) {
+	var makeCall = function(apiUrl, requestMethod, extraData) {
 		
 		// show spinnner
 		$('#loading').show();
@@ -8,8 +8,10 @@ jQuery(function($) {
 		// make the call
 		$.ajax({
 			url : apiUrl + apiUrlSuffix,
+			type: requestMethod,
 			dataType : apiDataType,
-			headers: apiExtraHeaders
+			headers: apiExtraHeaders,
+			data : extraData
 		}).success(function(data, textStatus, jqXHR) {
 			$('#result').text(JSON.stringify(data, null, 4));
 			hljs.highlightBlock($('#result').get(0),'    ');
@@ -26,7 +28,7 @@ jQuery(function($) {
 		$('#sidebar a').removeClass('active');
 		$(this).addClass('active');
 		$('#apiurl').val(apiBaseUrl + $(this).attr('href'));
-		makeCall(apiBaseUrl + $(this).attr('href'));
+		makeCall(apiBaseUrl + $(this).attr('href'), $(this).data('requestmethod') || 'get', $(this).data('extradata') || {});
 	});
 		
 	// don't send forms

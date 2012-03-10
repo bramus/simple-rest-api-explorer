@@ -6,7 +6,7 @@
 <head>
 
 	<meta charset="utf-8">
-	<title>Simple REST API Explorer &mdash; A simple way to showcasing and exploring all endpoints of your RESTful API</title>
+	<title>Simple REST API Explorer</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 
@@ -34,18 +34,22 @@
 	<div class="container">
 		<div class="sixteen columns">
 			<h1 class="remove-bottom" style="margin-top: 40px">Simple REST API Explorer <img src="img/spinner.gif" id="loading" alt="" title="" width="16" height="16" style="display: none;" /></h1>
-			<h5>Twitter API Demo (partial)</h5>
+			<h5>MoviesDB Example API</h5>
 			<hr />
 		</div>
 		<div class="four columns" id="sidebar">
 			<dl>
-				<dt style="margin-top: 0"><h4>Statuses</h4></dt>
-				<dd><a href="/statuses/show.json?id=65214371684548609&amp;include_entities=true">detail</a><small>/statuses/show/:id</small></dd>
-				<dd><a href="/statuses/65214371684548609/retweeted_by.json">retweeted by</a><small>/statuses/:id/retweeted_by</small></dd>
-				<dd><a href="/statuses/oembed.json?id=65214371684548609">oembed</a><small>/statuses/oembed</small></dd>
-				<dt><h4>Users</h4></dt>
-				<dd><a href="/users/show.json?screen_name=bramus&amp;include_entities=true">detail</a><small>/users/show</small></dd>
-				<dd><a href="/users/lookup.json?screen_name=bramus,bramurss&amp;include_entities=true">lookup</a><small>/users/lookup</small></dd>
+				<dt style="margin-top: 0"><h4>Movies</h4></dt>
+				<dd><a href="/movies" data-requestmethod="get">overview</a><small>GET /movies</small></dd>
+				<dd><a href="/movies/1" data-requestmethod="get">detail</a><small>GET /movies/#</small></dd>
+				<dt><h4>People</h4></dt>
+				<dd><a href="/people/1" data-requestmethod="get">detail</a><small>GET /people/#</small></dd>
+				<dt><h4>Genres</h4></dt>
+				<dd><a href="/genres" data-requestmethod="get">overview</a><small>GET /genres</small></dd>
+				<dd><a href="/genres/5" data-requestmethod="get">detail</a><small>GET /genres/#</small></dd>
+				<dd><a href="/genres" data-requestmethod="post" data-extradata="title=Fantasy">insert</a><small>POST /genres</small></dd>
+				<dd><a href="/genres/5" data-requestmethod="post" data-extradata="title=New title">update</a><small>POST /genres/#</small></dd>
+				<dd><a href="/genres/5" data-requestmethod="delete">delete</a><small>DELETE /genres/#</small></dd>
 			</dl>
 		</div>
 		<div class="eleven columns">
@@ -62,17 +66,9 @@
 	<script src="js/jquery-1.7.1.min.js"></script>
 	<script src="js/highlight.min.js"></script>
 	<script>
-		// base URL of the API to call.
-		var apiBaseUrl = 'https://api.twitter.com/1';
-		
-		// Data type you're expecting back. Only tested with JSON and JSONP
-		var apiDataType = 'jsonp';
-		
-		// Extra headers you want to inject when making the call. - eg. an API-Key or an authentication token.
-		// WARNING: Doesn't work when using 'jsonp' as API Data Type! If you do need both JSONP *and* an API Key: ask your API provider to enable CORS so you can switch to JSON.
-		var apiExtraHeaders = {};
-		
-		// Extra suffix to add to each URL called. - eg. an API-Key or an authentication token.
+		var apiBaseUrl = 'http://moviesdb.brm.us/api';
+		var apiDataType = 'json';
+		var apiExtraHeaders = { 'X-Api-Key' : 'WV4tP4zT-qJNdN8Fb-XrQCLmJs-5gwvVr9e-Ge5bNar6' };
 		var apiUrlSuffix = '';
 	</script>
 	<script src="js/main.js"></script>
