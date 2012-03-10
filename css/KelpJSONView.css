@@ -1,0 +1,51 @@
+.KelpJSONView
+{
+    font-family:courier;
+    font-weight:normal;
+    font-style:normal;
+    font-size:14px;
+}
+.KelpJSONView ol {
+    width:100%;
+    overflow:scroll;
+	height: 400px;
+	margin: 0;
+	padding: 0;
+	color: gainsboro;
+    background-color:#3F3F3F;
+	list-style-position: inside;
+	list-style: none;
+}
+.KelpJSONView ol li
+{
+    white-space:nowrap;
+	margin-bottom: 0;
+}
+.jsonhighlight
+{
+    /* background-color:#eee; */
+}
+.jsonname
+{
+    color:#555;
+}
+.jsonstring
+{
+    color:#268BD2;
+}
+.jsonnull
+{
+    color:#d63Bd2;
+}
+.jsonnumber
+{
+    color:#964B32;
+}
+.jsonboolean
+{
+    color:#b64B72;
+}
+.jsontag
+{
+    color:#999;
+}
