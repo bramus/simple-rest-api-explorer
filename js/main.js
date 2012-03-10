@@ -25,10 +25,12 @@ jQuery(function($) {
 	// hook sidebar clicks
 	$('#sidebar').on('click', 'a', function(e) {
 		e.preventDefault();
-		$('#sidebar a').removeClass('active');
-		$(this).addClass('active');
-		$('#apiurl').val(apiBaseUrl + $(this).attr('href'));
-		makeCall(apiBaseUrl + $(this).attr('href'), $(this).data('requestmethod') || 'get', $(this).data('extradata') || {});
+		if ($('#loading').is(':hidden')) {
+			$('#sidebar a').removeClass('active');
+			$(this).addClass('active');
+			$('#apiurl').val(apiBaseUrl + $(this).attr('href'));
+			makeCall(apiBaseUrl + $(this).attr('href'), $(this).data('requestmethod') || 'get', $(this).data('extradata') || {});
+		}
 	});
 		
 	// don't send forms
