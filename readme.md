@@ -24,4 +24,4 @@ Update the `<dl>` in the `#sidebar` to hold the available endpoints of your API.
 * Only tested with APIs returning JSON or JSONP.
 * Custom headers don't work with JSONP. If you do need both JSONP *and* an API-Key: ask your API provider to enable [CORS](http://www.html5rocks.com/en/tutorials/cors/) so you can switch to JSON.
 
-* Simple REST API Explorer is powered by [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/) and [Skeleton](http://www.getskeleton.com/)
+Simple REST API Explorer is powered by (a tweaked) [Kelp JSON View](http://kelp.phate.org/2011/11/kelp-json-view-json-syntax-highlighting.html) and [Skeleton](http://www.getskeleton.com/)
