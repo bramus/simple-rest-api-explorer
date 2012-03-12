@@ -13,7 +13,7 @@ jQuery(function($) {
 			headers: apiExtraHeaders,
 			data : extraData
 		}).success(function(data, textStatus, jqXHR) {
-			$.JSONView(data, $('#result').empty());
+			$.JSONView(data, $('#result'));
 			$('#loading').hide();
 		}).error(function(jqXHR, textStatus, errorThrown) {
 			alert('Oops, something went wrong while processing your request! Please refresh!');

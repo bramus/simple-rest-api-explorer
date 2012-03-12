@@ -1,28 +1,36 @@
+/*
+ * Kelp JSONView â€“ http://kelp.phate.org/2011/11/kelp-json-view-json-syntax-highlighting.html
+ * Modded by Bramus! - http://www.bram.us/
+ */
 $.extend(jQuery,
 {
-    // json ¥i¶Ç¤J json ©Î JavaScript Object
-    // container ¬°¿é¥Xªº®e¾¹¡AjQuery Object
+    // json Â¥iÂ¶Ã‡Â¤J json Â©Ã JavaScript Object
+    // container Â¬Â°Â¿Ã©Â¥XÂªÂºÂ®eÂ¾Â¹Â¡AjQuery Object
     JSONView: function (json, container) {
-        var ob;
-        if (typeof json == 'string')
-            ob = JSON.parse(json);
-        else
-            ob = json;
-        var p, l = [], c = container;
-        var repeat = function (s, n) {  //²£¥Í s ¦r¤¸ n ¦¸
+        var ob = (typeof json == 'string') ? JSON.parse(json) : json,
+		    p, 
+		    l = [], 
+		    c = container;
+		
+        var repeat = function (s, n) {
             return new Array(n + 1).join(s);
         };
+
+		// Check whether a string is an URL â€“ Added by Bramus!
 		var isUrl = function(s) {
 			var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
 			return regexp.test(s);
 		};
+		
+		// Escape string for output â€“ Added by Bramus!
 		var htmlEntities = function(str) {
 		    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 		}
-        //²£¥Í JSON µ²ºc¸ê®Æªº»¼°j¨ç¼Æ
-        //o     ¨Ó·½ª«¥ó
-        //isar  ¸ê®Æ¬O true ªº¸Ü¥Nªí³o¤@¦¸»¼°j¬°°}¦C¸ê®Æ
-        //s     »¼°j¶¥¼h¼Æ
+		
+        //Â²Â£Â¥Ã JSON ÂµÂ²ÂºcÂ¸ÃªÂ®Ã†ÂªÂºÂ»Â¼Â°jÂ¨Ã§Â¼Ã†
+        //o     Â¨Ã“Â·Â½ÂªÂ«Â¥Ã³
+        //isar  Â¸ÃªÂ®Ã†Â¬O true ÂªÂºÂ¸ÃœÂ¥NÂªÃ­Â³oÂ¤@Â¦Â¸Â»Â¼Â°jÂ¬Â°Â°}Â¦CÂ¸ÃªÂ®Ã†
+        //s     Â»Â¼Â°jÂ¶Â¥Â¼hÂ¼Ã†
         var r = function (o, isar, s) {
             for (var n in o) {
                 var p = o[n];
@@ -85,7 +93,7 @@ $.extend(jQuery,
                 l.push(last);
         };
 
-        //±N JavaScript Object ®æ¦¡¤Æ¶ë¶i array ¤¤
+        //Â±N JavaScript Object Â®Ã¦Â¦Â¡Â¤Ã†Â¶Ã«Â¶i array Â¤Â¤
         if (ob.length == undefined) {
             //object
             l.push({ Text: '<span class="jsontag">{</span>', Step: 0 });
@@ -99,21 +107,16 @@ $.extend(jQuery,
             l.push({ Text: '<span class="jsontag">]</span>', Step: 0 });
         }
 
-        //¶}©l¿é¥X
-        var f = true;   //true¬°©_¼Æ¦æ
-        c.addClass('KelpJSONView');
-        c.append('<ol></ol>');
-        c = c.find('ol');
+        // Build HTML String
+        var html = '<ol>';
         for (var index in l) {
             var jobject = l[index];
-            if (f) {
-                c.append($('<li class="jsonhighlight">' + repeat(' &nbsp; &nbsp;', jobject.Step) + jobject.Text + '</li>'));
-                f = false;
-            }
-            else {
-                c.append($('<li>' + repeat(' &nbsp; &nbsp;', jobject.Step) + jobject.Text + '</li>'));
-                f=true;
-            }
+            html += '<li>' + repeat(' &nbsp; &nbsp;', jobject.Step) + jobject.Text + '</li>';
         }
+		html += '</ol>';
+		
+		// Inject HTML String into container
+		c.addClass('KelpJSONView').html(html);
+		
     }
 });
