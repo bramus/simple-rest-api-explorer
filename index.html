@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="css/layout.css">
 	
 	<link rel="stylesheet" href="css/explorer.css">
-	<link rel="stylesheet" href="css/zenburn.min.css">
+	<link rel="stylesheet" href="css/KelpJSONView.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -65,7 +65,7 @@
 		<div class="eleven columns">
 			<form action="#" method="post">
 				<label>API URL: <input type="text" id="apiurl" /></label>
-				<pre><code id="result" class="language-javascript"></code></pre>
+				<div id="result"></div>
 			</form>
 		</div>
 		<div class="twelve columns offset-by-four">
@@ -75,7 +75,7 @@
 	</div>
 
 	<script src="js/jquery-1.7.1.min.js"></script>
-	<script src="js/highlight.min.js"></script>
+	<script src="js/KelpJSONView.js"></script>
 	<script>
 		var apiBaseUrl = 'http://moviesdb.brm.us/api';
 		var apiDataType = 'json';
