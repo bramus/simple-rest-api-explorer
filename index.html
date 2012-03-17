@@ -48,15 +48,25 @@
 				<dd><a href="/genres" data-requestmethod="get">overview</a><small>GET /genres</small></dd>
 				<dd><a href="/genres/5" data-requestmethod="get">detail</a><small>GET /genres/#</small></dd>
 				<dd><a href="/genres" data-requestmethod="post" data-extradata="title=Fantasy">insert</a><small>POST /genres</small></dd>
-				<dd><a href="/genres/5" data-requestmethod="post" data-extradata="title=New title">update</a><small>POST /genres/#</small></dd>
+				<dd><a href="/genres/5" data-requestmethod="put" data-extradata="title=New title">update</a><small>PUT /genres/#</small></dd>
 				<dd><a href="/genres/5" data-requestmethod="delete">delete</a><small>DELETE /genres/#</small></dd>
 			</dl>
 		</div>
 		<div class="eleven columns">
-			<form action="#" method="post">
-				<label>API URL: <input type="text" id="apiurl" /></label>
-				<div id="result"></div>
-			</form>
+			<form action="#" method="post" class="row">
+				<label class="two columns alpha">
+					<select name="requestmethod" id="requestmethod">
+						<option value="GET">GET</option>
+						<option value="POST">POST</option>
+						<option value="PUT">PUT</option>
+						<option value="DELETE">DELETE</option>
+					</select>
+				</label>
+				<label class="nine columns omega">
+					<input type="text" id="apiurl" />
+				</label>
+			</form>	
+			<div id="result"></div>
 		</div>
 		<div class="twelve columns offset-by-four">
 			<p>Simple REST API Explorer, built by Bramus! &mdash; <a href="http://www.bram.us/">http://www.bram.us/</a></p>

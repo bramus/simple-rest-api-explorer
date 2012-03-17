@@ -28,31 +28,72 @@ jQuery(function($) {
 			$('#sidebar a').removeClass('active');
 			$(this).addClass('active');
 			var url = $(this).attr('href');
+			var requestmethod = $(this).data('requestmethod').toLowerCase() || 'get';
 			$('#apiurl').val(apiBaseUrl + url);
-			!dontpush && history.pushState({'href': url}, 'clicked ' + url, '#' + url);
-			makeCall(apiBaseUrl + url, $(this).data('requestmethod') || 'get', $(this).data('extradata') || {});
+			$('#requestmethod').val(requestmethod.toUpperCase());
+			!dontpush && history.pushState({'href': url, 'method': requestmethod}, 'clicked ' + url, '#' + requestmethod + '|' + url);
+			makeCall(apiBaseUrl + url, requestmethod, $(this).data('extradata') || {});
 		}
 	});
 		
-	// don't send forms
-	$('form').on('submit', function(e){
+	// hook form submit
+	$('form').on('submit', function(e, dontpush){
 		e.preventDefault();
-		if ($('#apiurl').val().indexOf(apiBaseUrl) == 0)
-			makeCall($('#apiurl').val());
-		else
+		if ($('#apiurl').val().indexOf(apiBaseUrl) == 0) {
+			var url = $('#apiurl').val().replace(apiBaseUrl,'');
+			var method = $('#requestmethod').val().toLowerCase();
+			!dontpush && history.pushState({'href': url, 'method': method}, 'clicked ' + url, '#' + method + '|' + url);
+			!dontpush && $('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').length && $('#sidebar a').removeClass('active') && $('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').addClass('active');
+			makeCall(apiBaseUrl + url, $('#requestmethod').val());
+		} else {
 			alert('You are only allowed make calls to ' + apiBaseUrl);
+		}
 	});
 	
 	// History Popstate
 	$(window).on('popstate', function(e) {
 		e.preventDefault();
 		$('#sidebar a').removeClass('active');
+		
+		// actual popstate
 		if (e.originalEvent.state && e.originalEvent.state.href) {
-			$('#sidebar a[href="' + e.originalEvent.state.href + '"]').trigger('click', true);
-		} else {
-			if (window.location.hash) {
-				$('#sidebar a[href="' + window.location.hash.substr(1) + '"]').trigger('click', true);
-			} else {
+			
+			// link exists in sidebar: highlight it
+			if ($('#sidebar a[href="' + e.originalEvent.state.href + '"][data-requestmethod="' + e.originalEvent.state.method + '"]').length) {
+				$('#sidebar a[href="' + e.originalEvent.state.href + '"][data-requestmethod="' + e.originalEvent.state.method + '"]').addClass('active');
+			}
+			
+			// fill form & submit (but don't push on history stack)
+			$('#apiurl').val(apiBaseUrl + e.originalEvent.state.href);
+			$('#requestmethod').val(e.originalEvent.state.method.toUpperCase());
+			$('form').trigger('submit', true);
+			
+		}
+		
+		// page load
+		else {
+			
+			// hash set
+			if (window.location.hash && (window.location.hash.indexOf('|') > -1)) {
+				
+				// extract method & url
+				var method = window.location.hash.substr(1).split('|')[0].toLowerCase();
+				var url = window.location.hash.substr(1).split('|')[1];
+				
+				// link exists in sidebar: highlight it
+				if ($('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').length) {
+					$('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').addClass('active');
+				}
+				
+				// fill form & submit (but don't push on history stack)
+				$('#apiurl').val(apiBaseUrl + url);
+				$('#requestmethod').val(method.toUpperCase());
+				$('form').trigger('submit', true);
+
+			} 
+			
+			// no has set: call first link
+			else {
 				$('#sidebar a:first').addClass('active').trigger('click', true);
 			}
 		}
