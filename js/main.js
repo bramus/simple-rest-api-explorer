@@ -16,7 +16,8 @@ jQuery(function($) {
 			$.JSONView(data, $('#result'));
 			$('#loading').hide();
 		}).error(function(jqXHR, textStatus, errorThrown) {
-			alert('Oops, something went wrong while processing your request! Please refresh!');
+			$.JSONView(jqXHR.responseText ? JSON.parse(jqXHR.responseText) : {}, $('#result'));
+			// alert('Oops, something went wrong while processing your request (' + errorThrown + ')!');
 			$('#loading').hide();
 		});
 	}
