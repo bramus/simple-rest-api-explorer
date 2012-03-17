@@ -40,10 +40,10 @@ jQuery(function($) {
 	$('form').on('submit', function(e, dontpush){
 		e.preventDefault();
 		if ($('#apiurl').val().indexOf(apiBaseUrl) == 0) {
-			$('#sidebar a').removeClass('active');
-			$('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').addClass('active');
 			var url = $('#apiurl').val().replace(apiBaseUrl,'');
 			var method = $('#requestmethod').val().toLowerCase();
+			$('#sidebar a').removeClass('active');
+			$('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').addClass('active');
 			!dontpush && history.pushState({'href': url, 'method': method}, 'clicked ' + url, '#' + method + '|' + url);
 			makeCall(apiBaseUrl + url, $('#requestmethod').val());
 		} else {
