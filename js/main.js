@@ -40,10 +40,11 @@ jQuery(function($) {
 	$('form').on('submit', function(e, dontpush){
 		e.preventDefault();
 		if ($('#apiurl').val().indexOf(apiBaseUrl) == 0) {
+			$('#sidebar a').removeClass('active');
+			$('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').addClass('active');
 			var url = $('#apiurl').val().replace(apiBaseUrl,'');
 			var method = $('#requestmethod').val().toLowerCase();
 			!dontpush && history.pushState({'href': url, 'method': method}, 'clicked ' + url, '#' + method + '|' + url);
-			!dontpush && $('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').length && $('#sidebar a').removeClass('active') && $('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').addClass('active');
 			makeCall(apiBaseUrl + url, $('#requestmethod').val());
 		} else {
 			alert('You are only allowed make calls to ' + apiBaseUrl);
@@ -57,11 +58,6 @@ jQuery(function($) {
 		
 		// actual popstate
 		if (e.originalEvent.state && e.originalEvent.state.href) {
-			
-			// link exists in sidebar: highlight it
-			if ($('#sidebar a[href="' + e.originalEvent.state.href + '"][data-requestmethod="' + e.originalEvent.state.method + '"]').length) {
-				$('#sidebar a[href="' + e.originalEvent.state.href + '"][data-requestmethod="' + e.originalEvent.state.method + '"]').addClass('active');
-			}
 			
 			// fill form & submit (but don't push on history stack)
 			$('#apiurl').val(apiBaseUrl + e.originalEvent.state.href);
@@ -79,11 +75,6 @@ jQuery(function($) {
 				// extract method & url
 				var method = window.location.hash.substr(1).split('|')[0].toLowerCase();
 				var url = window.location.hash.substr(1).split('|')[1];
-				
-				// link exists in sidebar: highlight it
-				if ($('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').length) {
-					$('#sidebar a[href="' + url + '"][data-requestmethod="' + method + '"]').addClass('active');
-				}
 				
 				// fill form & submit (but don't push on history stack)
 				$('#apiurl').val(apiBaseUrl + url);
