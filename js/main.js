@@ -13,11 +13,15 @@ jQuery(function($) {
 			headers: apiExtraHeaders,
 			data : extraData
 		}).success(function(data, textStatus, jqXHR) {
-			$.JSONView(data, $('#result'));
+			if (data) {
+				$.JSONView(data, $('#result'));
+			} else {
+				$.JSONView({}, $('#result'));
+				$('#result').html('<ol><li>Server returned no data. (HTTP Status Code: ' + jqXHR.status + ' – ' + jqXHR.statusText + ')</li></ol>'); // 204 for example
+			}
 			$('#loading').hide();
 		}).error(function(jqXHR, textStatus, errorThrown) {
 			$.JSONView(jqXHR.responseText ? JSON.parse(jqXHR.responseText) : {}, $('#result'));
-			// alert('Oops, something went wrong while processing your request (' + errorThrown + ')!');
 			$('#loading').hide();
 		});
 	}
