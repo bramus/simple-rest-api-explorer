@@ -58,41 +58,41 @@ jQuery(function($) {
 	
 	// History Popstate
 	$(window).on('popstate', function(e) {
+		
 		e.preventDefault();
 		$('#sidebar a').removeClass('active');
 		
-		// actual popstate
+		// actual popstate: fill form & submit (but don't push on history stack)
 		if (e.originalEvent.state && e.originalEvent.state.href) {
-			
-			// fill form & submit (but don't push on history stack)
 			$('#apiurl').val(apiBaseUrl + e.originalEvent.state.href);
 			$('#requestmethod').val(e.originalEvent.state.method.toUpperCase());
 			$('form').trigger('submit', true);
-			
 		}
 		
-		// page load
+		// page load: do nothing, the onload will catch it
 		else {
-			
-			// hash set
-			if (window.location.hash && (window.location.hash.indexOf('|') > -1)) {
-				
-				// extract method & url
-				var method = window.location.hash.substr(1).split('|')[0].toLowerCase();
-				var url = window.location.hash.substr(1).split('|')[1];
-				
-				// fill form & submit (but don't push on history stack)
-				$('#apiurl').val(apiBaseUrl + url);
-				$('#requestmethod').val(method.toUpperCase());
-				$('form').trigger('submit', true);
-
-			} 
-			
-			// no has set: call first link
-			else {
-				$('#sidebar a:first').addClass('active').trigger('click', true);
-			}
+			return; 
 		}
 	});
+	
+	// actual onload logic
+	// hash set: fill form & submit (but don't push on history stack)
+	if (window.location.hash && (window.location.hash.indexOf('|') > -1)) {
+		
+		// extract method & url
+		var method = window.location.hash.substr(1).split('|')[0].toLowerCase();
+		var url = window.location.hash.substr(1).split('|')[1];
+		
+		// fill form & submit (but don't push on history stack)
+		$('#apiurl').val(apiBaseUrl + url);
+		$('#requestmethod').val(method.toUpperCase());
+		$('form').trigger('submit', true);
+
+	} 
+	
+	// no hash set: call first link
+	else {
+		$('#sidebar a:first').addClass('active').trigger('click', true);
+	}
 	
 });
