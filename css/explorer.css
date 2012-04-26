@@ -25,3 +25,10 @@ form.row, form.row input  {
 	width: 100%;
 	margin-bottom: 20px;
 }
+
+p.warning {
+	padding: 8px 35px;
+	border: 1px solid #D38C1B;
+	background: #FBF2C3 url(../img/icnWarning.gif) no-repeat 8px 10px;
+	font-size: 0.9em;
+}
