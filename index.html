@@ -42,11 +42,14 @@
 				<dt style="margin-top: 0"><h4>Movies</h4></dt>
 				<dd><a href="/movies" data-requestmethod="get">overview</a><small>GET /movies</small></dd>
 				<dd><a href="/movies/1" data-requestmethod="get">detail</a><small>GET /movies/#</small></dd>
+				<dd><a href="/movies/1/photos" data-requestmethod="get">photos</a><small>GET /movies/#/photos</small></dd>
 				<dt><h4>People</h4></dt>
 				<dd><a href="/people/1" data-requestmethod="get">detail</a><small>GET /people/#</small></dd>
+				<dd><a href="/people/1/movies" data-requestmethod="get">movies</a><small>GET /people/#/movies</small></dd>
 				<dt><h4>Genres</h4></dt>
 				<dd><a href="/genres" data-requestmethod="get">overview</a><small>GET /genres</small></dd>
 				<dd><a href="/genres/5" data-requestmethod="get">detail</a><small>GET /genres/#</small></dd>
+				<dd><a href="/genres/5/movies" data-requestmethod="get">movies</a><small>GET /genres/#/movies</small></dd>
 				<dd><a href="/genres" data-requestmethod="post" data-extradata="title=Fantasy">insert</a><small>POST /genres</small></dd>
 				<dd><a href="/genres/5" data-requestmethod="put" data-extradata="title=New title">update</a><small>PUT /genres/#</small></dd>
 				<dd><a href="/genres/5" data-requestmethod="delete">delete</a><small>DELETE /genres/#</small></dd>
@@ -79,7 +82,7 @@
 	<script>
 	
 		// Config
-		var apiBaseUrl = 'http://moviesdb.brm.us/api';
+		var apiBaseUrl = 'http://moviesdb.dev/api';
 		var apiDataType = 'json';
 		var apiExtraHeaders = { 'X-Api-Key' : 'WV4tP4zT-qJNdN8Fb-XrQCLmJs-5gwvVr9e-Ge5bNar6' };
 		var apiUrlSuffix = '';
